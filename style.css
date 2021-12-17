@@ -23,10 +23,9 @@ h1 {
     padding: 5px;
     border-radius: 10px;
     text-align: center;
-    width: 200px;
+    width: 140px;
     transition: 0.5s;
-    font-weight: 500;
-    font-size: 20px;
+    font-size: 16px;
     margin-bottom: 20px;
     margin-top: 20px;
     border-style:solid;
@@ -34,16 +33,17 @@ h1 {
     border-color: rgb(211, 211, 211);
     background-color: gainsboro;
     color: navy;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Ubuntu Condensed', sans-serif;
 }
 
 .button:hover {
     background: rgb(211, 211, 211);
     box-shadow: 0 0 0.25em gray;
+    color: firebrick;
 }
 
 ion-icon {
-    font-size: 24px;
+    font-size: 28px;
 }
 
 #texto-tarefa {

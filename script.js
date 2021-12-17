@@ -3,6 +3,7 @@ const listaTarefa = [];
 const tarefa = document.getElementById('texto-tarefa');
 const btInserirTarefa = document.getElementById('criar-tarefa');
 const inputTexto = document.getElementById('texto-tarefa');
+const btApagaTudo = document.getElementById('apaga-tudo');
 
 function selecionarTarefa(evento) {
   const classeEvento = 'selecionado';
@@ -59,6 +60,18 @@ function insereTarefa() {
   acaoTarefas();
 }
 
+function apagaTudo() {
+  if (listaTarefa.length === 0) {
+    alert('Lista vazia!');
+    return;
+  }
+  const lista = document.getElementById('lista-tarefas');
+  while (lista.firstChild) {
+    lista.removeChild(lista.firstChild);
+  }
+  listaTarefa.splice(0, listaTarefa.length);
+}
+
 function verificaEnter(evento) {
   const tecla = evento.keyCode;
   if (tecla === 13) {
@@ -68,3 +81,4 @@ function verificaEnter(evento) {
 
 btInserirTarefa.addEventListener('click', insereTarefa);
 inputTexto.addEventListener('keyup', verificaEnter);
+btApagaTudo.addEventListener('click', apagaTudo)

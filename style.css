@@ -53,14 +53,21 @@ ion-icon {
 
 .selecionado {
     background: rgb(128, 128, 128);
-    color: navy;
+    color:darkorange;
+    font-weight: 600;
+}
+
+.completed {
+    text-decoration: line-through solid rgb(0,0,0);
+    color: rgb(54,54,54);
+    font-weight: 100;
 }
 
 #lista-tarefas {
     width: 500px;
 }
 
-.item-tarefas {
+li {
     border-bottom-width: 1px;
     border-bottom-style: solid;
     border-bottom-color: rgb(28, 28, 28);

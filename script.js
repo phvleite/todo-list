@@ -2,11 +2,18 @@ const listaTarefa = [];
 
 const tarefa = document.getElementById('texto-tarefa');
 const btInserirTarefa = document.getElementById('criar-tarefa');
+const inputTexto = document.getElementById('texto-tarefa')
 
 function selecionarTarefa(evento) {
   const selecionado = document.getElementById(evento.target.id);
   if (selecionado.className !== 'item-tarefas selecionado') {
+    const selecionadoAtual = document.querySelector('.selecionado');
+    if (selecionadoAtual) {
+      selecionadoAtual.classList.remove('selecionado');
+    }
     selecionado.classList.add('selecionado');
+  } else {
+    selecionado.classList.remove('selecionado');
   }
 }
 
@@ -37,4 +44,12 @@ function insereTarefa() {
   acaoTarefas();
 }
 
+function verificaEnter(evento) {
+  const tecla = evento.keyCode;
+  if (tecla === 13) {
+    insereTarefa();
+  }
+}
+
 btInserirTarefa.addEventListener('click', insereTarefa);
+inputTexto.addEventListener('keyup', verificaEnter);

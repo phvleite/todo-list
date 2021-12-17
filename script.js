@@ -81,4 +81,4 @@ function verificaEnter(evento) {
 
 btInserirTarefa.addEventListener('click', insereTarefa);
 inputTexto.addEventListener('keyup', verificaEnter);
-btApagaTudo.addEventListener('click', apagaTudo)
+btApagaTudo.addEventListener('click', apagaTudo);

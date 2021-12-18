@@ -42,10 +42,6 @@ h1 {
     color: firebrick;
 }
 
-ion-icon {
-    font-size: 28px;
-}
-
 #texto-tarefa {
     font-size: 18px;
     color: navy;
@@ -68,9 +64,10 @@ ion-icon {
 }
 
 li {
+    display: flex;
     border-bottom-width: 1px;
     border-bottom-style: solid;
-    border-bottom-color: rgb(28, 28, 28);
+    border-bottom-color: rgb(169, 169, 169);
     font-size: 20px;
     color: deepskyblue;
     height: 25px;
@@ -82,4 +79,9 @@ li:nth-child(2n) {
 
 li:nth-child(2n).selecionado {
     background-color: gray;
+}
+
+ol {
+    display: flex;
+    flex-direction: column;
 }

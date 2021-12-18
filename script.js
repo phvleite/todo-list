@@ -9,7 +9,7 @@ const btApagaTudo = document.getElementById('apaga-tudo');
 const btApagaFinalizados = document.getElementById('remover-finalizados');
 const classBasicaItemLista = 'item-tarefas';
 const btSalvarTarefas = document.getElementById('salvar-tarefas');
-// const btMoverCima = document.getElementById('mover-cima');
+const btMoverCima = document.getElementById('mover-cima');
 // const btMoverBaixo = document.getElementById('mover-baixo');
 const btRemoverSelecionado = document.getElementById('remover-selecionado');
 
@@ -71,6 +71,7 @@ function recuperaLista(itensRemover, itensTodos) {
   if (itensLista.length > 0) {
     for (let i = 0; i < itensLista.length; i += 1) {
       itensLista[i].setAttribute('id', `${i}`);
+      itensLista[i].style.order = `${i}`;
       lista.appendChild(itensLista[i]);
       listaTarefa.push(itensLista[i].innerText);
     }
@@ -90,6 +91,7 @@ function insereTarefa() {
     itemLista.innerText = listaTarefa[i];
     itemLista.setAttribute('class', classBasicaItemLista);
     itemLista.setAttribute('id', `${i}`);
+    itemLista.style.order = `${i}`;
     lista.appendChild(itemLista);
   }
   tarefa.value = '';
@@ -193,9 +195,15 @@ function salvaListaTarefas() {
   alert('Lista de Tarefas salvas!');
 }
 
+function moverCima(evento) {
+  const ordem = document.getElementById(evento.target.id);
+  console.log(ordem.id);
+}
+
 btInserirTarefa.addEventListener('click', insereTarefa);
 inputTexto.addEventListener('keyup', verificaEnter);
 btApagaTudo.addEventListener('click', apagaTudo);
 btApagaFinalizados.addEventListener('click', removeFinalizados);
 btRemoverSelecionado.addEventListener('click', removeSelecionado);
 btSalvarTarefas.addEventListener('click', salvaListaTarefas);
+btMoverCima.addEventListener('click', moverCima);

@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/cognitive-complexity */
 const listaTarefa = [];
 const idElementoPaiLista = 'lista-tarefas';
 const tarefa = document.getElementById('texto-tarefa');
@@ -9,7 +10,7 @@ const classBasicaItemLista = 'item-tarefas';
 // const btSalvarTarefas = document.getElementById('salvar-tarefas');
 // const btMoverCima = document.getElementById('mover-cima');
 // const btMoverBaixo = document.getElementById('mover-baixo');
-// const btRemoverSelecionado = document.getElementById('remover-selecionados');
+const btRemoverSelecionado = document.getElementById('remover-selecionado');
 
 function selecionarTarefa(evento) {
   const classeEvento = 'selecionado';
@@ -46,22 +47,34 @@ function acaoTarefas() {
   }
 }
 
-function recuperaLista() {
-  if (listaTarefa.length === 0) {
-    return;
+function verificaExistencia(itensTodos, itensRemover) {
+  let cont = 0;
+  const itens = [];
+  for (let i = 0; i < itensTodos.length; i += 1) {
+    for (let x = 0; x < itensRemover.length; x += 1) {
+      if (itensTodos[i].id === itensRemover[x].id) {
+        cont += 1;
+      }
+    }
+    if (cont === 0) {
+      itens.push(itensTodos[i]);
+    }
+    cont = 0;
   }
+  return itens;
+}
+
+function recuperaLista(itensRemover, itensTodos) {
   const lista = document.getElementById(idElementoPaiLista);
-  while (lista.firstChild) {
-    lista.removeChild(lista.firstChild);
+  const itensLista = verificaExistencia(itensTodos, itensRemover);
+  if (itensLista.length > 0) {
+    for (let i = 0; i < itensLista.length; i += 1) {
+      itensLista[i].setAttribute('id', `${i}`);
+      lista.appendChild(itensLista[i]);
+      listaTarefa.push(itensLista[i].innerText);
+    }
+    acaoTarefas();
   }
-  const itemLista = document.createElement('li');
-  for (let i = 0; i < listaTarefa.length; i += 1) {
-    itemLista.innerText = listaTarefa[i];
-    itemLista.setAttribute('class', classBasicaItemLista);
-    itemLista.setAttribute('id', `${i}`);
-    lista.appendChild(itemLista);
-  }
-  acaoTarefas();
 }
 
 function insereTarefa() {
@@ -94,26 +107,35 @@ function apagaTudo() {
   listaTarefa.splice(0, listaTarefa.length);
 }
 
-function apagaFinalizados() {
+function removeTerefas(tipoTarefa, mensagem) {
   if (listaTarefa.length === 0) {
     alert('Lista vazia!');
     return;
   }
-  let lista = document.querySelectorAll('.completed');
-  if (lista.length === 0) {
-    alert('Não existem tarefas finalizadas!');
+  const itensRemover = document.querySelectorAll(tipoTarefa);
+  const itensTodos = document.querySelectorAll('.item-tarefas');
+  if (itensRemover.length === 0) {
+    alert(mensagem);
     return;
   }
-  for (let i = 0; i < lista.length; i += 1) {
-    lista[i].parentElement.remove(lista[i]);
+  const lista = document.getElementById(idElementoPaiLista);
+  while (lista.firstChild) {
+    lista.removeChild(lista.firstChild);
   }
   listaTarefa.splice(0, listaTarefa.length);
-  lista = document.getElementById(idElementoPaiLista);
-  console.log(lista);
-/*   for (let i = 0; i < lista.length; i += 1) {
-    listaTarefa.push(lista[i].innerText);
-  } */
-  // recuperaLista();
+  recuperaLista(itensRemover, itensTodos);
+}
+
+function removeFinalizados() {
+  const tpTarefa = '.completed';
+  const mensagem = 'Não existem tarefas finalizadas!';
+  removeTerefas(tpTarefa, mensagem);
+}
+
+function removeSelecionado() {
+  const tpTarefa = '.selecionado';
+  const mensagem = 'Não existe tarefa selecionada!';
+  removeTerefas(tpTarefa, mensagem);
 }
 
 function verificaEnter(evento) {
@@ -126,4 +148,5 @@ function verificaEnter(evento) {
 btInserirTarefa.addEventListener('click', insereTarefa);
 inputTexto.addEventListener('keyup', verificaEnter);
 btApagaTudo.addEventListener('click', apagaTudo);
-btApagaFinalizados.addEventListener('click', apagaFinalizados);
+btApagaFinalizados.addEventListener('click', removeFinalizados);
+btRemoverSelecionado.addEventListener('click', removeSelecionado);

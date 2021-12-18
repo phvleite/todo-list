@@ -1,5 +1,6 @@
 /* eslint-disable sonarjs/cognitive-complexity */
 const listaTarefa = [];
+let itensTodosSalvos = [];
 const idElementoPaiLista = 'lista-tarefas';
 const tarefa = document.getElementById('texto-tarefa');
 const btInserirTarefa = document.getElementById('criar-tarefa');
@@ -7,7 +8,7 @@ const inputTexto = document.getElementById('texto-tarefa');
 const btApagaTudo = document.getElementById('apaga-tudo');
 const btApagaFinalizados = document.getElementById('remover-finalizados');
 const classBasicaItemLista = 'item-tarefas';
-// const btSalvarTarefas = document.getElementById('salvar-tarefas');
+const btSalvarTarefas = document.getElementById('salvar-tarefas');
 // const btMoverCima = document.getElementById('mover-cima');
 // const btMoverBaixo = document.getElementById('mover-baixo');
 const btRemoverSelecionado = document.getElementById('remover-selecionado');
@@ -145,8 +146,56 @@ function verificaEnter(evento) {
   }
 }
 
+function insereTarefas() {
+  const lista = document.getElementById(idElementoPaiLista);
+  for (let i = 0; i < listaTarefa.length; i += 1) {
+    const itemLista = document.createElement('li');
+    itemLista.innerText = listaTarefa[i];
+    itemLista.setAttribute('class', itensTodosSalvos[i][2]);
+    itemLista.setAttribute('id', `${itensTodosSalvos[i][0]}`);
+    lista.appendChild(itemLista);
+  }
+  acaoTarefas();
+}
+
+function recuperaTarefas() {
+  if (window.localStorage.getItem('itensTodosSalvos') === null) {
+    window.localStorage.setItem('itensTodosSalvos', JSON.stringify(itensTodosSalvos));
+  }
+  itensTodosSalvos = JSON.parse(window.localStorage.getItem('itensTodosSalvos'));
+  if (itensTodosSalvos.length > 0) {
+    for (let i = 0; i < itensTodosSalvos.length; i += 1) {
+      listaTarefa.push(itensTodosSalvos[i][1]);
+    }
+    insereTarefas();
+  }
+}
+
+recuperaTarefas();
+
+function salvaListaTarefas() {
+  const itensTodos = document.querySelectorAll('.item-tarefas');
+  if (itensTodos.length === 0) {
+    alert('Lista de terefas vazia!');
+    return;
+  }
+  itensTodosSalvos = [];
+  for (let i = 0; i < itensTodos.length; i += 1) {
+    itensTodosSalvos.push(
+      [
+        `${itensTodos[i].id}`,
+        `${itensTodos[i].textContent}`,
+        `${itensTodos[i].className}`,
+      ],
+    );
+  }
+  localStorage.setItem('itensTodosSalvos', JSON.stringify(itensTodosSalvos));
+  alert('Lista de Tarefas salvas!');
+}
+
 btInserirTarefa.addEventListener('click', insereTarefa);
 inputTexto.addEventListener('keyup', verificaEnter);
 btApagaTudo.addEventListener('click', apagaTudo);
 btApagaFinalizados.addEventListener('click', removeFinalizados);
 btRemoverSelecionado.addEventListener('click', removeSelecionado);
+btSalvarTarefas.addEventListener('click', salvaListaTarefas);

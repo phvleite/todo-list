@@ -23,9 +23,9 @@ h1 {
     padding: 5px;
     border-radius: 10px;
     text-align: center;
-    width: 160px;
+    width: 140px;
     transition: 0.5s;
-    font-size: 18px;
+    font-size: 16px;
     margin-bottom: 20px;
     margin-top: 20px;
     border-style:solid;
@@ -74,4 +74,12 @@ li {
     font-size: 20px;
     color: deepskyblue;
     height: 25px;
+}
+
+li:nth-child(2n) {
+    background-color: lightgray;
+}
+
+li:nth-child(2n).selecionado {
+    background-color: gray;
 }

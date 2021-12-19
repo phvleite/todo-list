@@ -18,14 +18,21 @@ h1 {
     margin: 20px;
 }
 
+#menu-inferior {
+    display: flex;
+    height: 30px;
+    margin-bottom: 40px;
+    align-content:flex-end;
+}
+
 .button {
     text-decoration: none;
     padding: 5px;
     border-radius: 10px;
     text-align: center;
-    width: 140px;
+    width: 110px;
     transition: 0.5s;
-    font-size: 16px;
+    font-size: 18px;
     margin-bottom: 20px;
     margin-top: 20px;
     border-style:solid;
@@ -43,8 +50,9 @@ h1 {
 }
 
 #texto-tarefa {
-    font-size: 18px;
+    font-size: 16px;
     color: navy;
+    font-family: 'Ubuntu Condensed', sans-serif;
 }
 
 .selecionado {
@@ -85,3 +93,5 @@ ol {
     display: flex;
     flex-direction: column;
 }
+
+ol:nth-child(n)

@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable sonarjs/cognitive-complexity */
 const listaTarefa = [];
 let itensTodosSalvos = [];
@@ -13,7 +14,10 @@ const classBasicaItemLista = 'item-tarefas';
 const btSalvarTarefas = document.getElementById('salvar-tarefas');
 const btMoverCima = document.getElementById('mover-cima');
 const btMoverBaixo = document.getElementById('mover-baixo');
+const btDesmarcarSelecionado = document.getElementById('desmarcar-selecionado');
 const btRemoverSelecionado = document.getElementById('remover-selecionado');
+const btResetar = document.getElementById('resetar');
+const btEditarSelecionado = document.getElementById('editar-selecionado');
 
 function selecionarTarefa(evento) {
   const classeEvento = 'selecionado';
@@ -25,6 +29,26 @@ function selecionarTarefa(evento) {
       selecionadoAtual.classList.remove(classeEvento);
     }
     selecionado.classList.add(classeEvento);
+  }
+}
+
+function desmarcarSelecionado() {
+  const resp = window.confirm('Atenção!!! Deseja desmarcar o registro?');
+  if (resp === true) {
+    const selecionado = document.querySelector(ClSelecionado);
+    selecionado.classList.remove('selecionado');
+  }
+}
+
+function editarSelecionado() {
+  const selecionado = document.querySelector(ClSelecionado);
+  if (!selecionado) {
+    alert('Não há tarefa selecionada');
+    return;
+  }
+  const resultado = window.prompt('Edite sua tarefa:', selecionado.innerText);
+  if (resultado) {
+    selecionado.innerText = resultado;
   }
 }
 
@@ -192,6 +216,16 @@ function salvaListaTarefas() {
   alert('Lista de Tarefas salvas!');
 }
 
+function resetarWebStorage() {
+  const resp = window.confirm('ATENÇÃO!!! OS REGISTROS SERÃO APAGADOS DA WEB STORAGE');
+  if (resp === true) {
+    itensTodosSalvos = [];
+    localStorage.setItem('itensTodosSalvos', JSON.stringify(itensTodosSalvos));
+    alert('Lista de Tarefas Apagada!');
+    apagaTudo();
+  }
+}
+
 function moverCima() {
   const tarefaMover = document.querySelector(ClSelecionado);
   const lista = document.getElementById(idElementoPaiLista);
@@ -209,10 +243,7 @@ function moverBaixo() {
     lista.insertBefore(tarefaMover, trocaTarefa.nextElementSibling);
   }
 }
-// Os metodo acima foi descoberto em code review no repositório
-// de ANDRÉ FELIPE (https://github.com/tryber/sd-019-a-project-todo-list/blob/andre-felipe-todo-list-project/script.js)
-// onde ele reporta que encontrou esta solução no
-// Repositório de LUÁ OCTAVINAO (https://github.com/tryber/sd-019-a-project-todo-list/pull/73/files#) e aplicado de acordo com a necessidade da função.
+// Os metodo acima foi descoberto em code review no repositório de ANDRÉ FELIPE (https://github.com/tryber/sd-019-a-project-todo-list/blob/andre-felipe-todo-list-project/script.js) onde ele reporta que encontrou esta solução no Repositório de LUÁ OCTAVINAO (https://github.com/tryber/sd-019-a-project-todo-list/pull/73/files#) e aplicado de acordo com a necessidade da função.
 
 btInserirTarefa.addEventListener('click', insereTarefa);
 inputTexto.addEventListener('keyup', verificaEnter);
@@ -222,3 +253,6 @@ btRemoverSelecionado.addEventListener('click', removeSelecionado);
 btSalvarTarefas.addEventListener('click', salvaListaTarefas);
 btMoverCima.addEventListener('click', moverCima);
 btMoverBaixo.addEventListener('click', moverBaixo);
+btResetar.addEventListener('click', resetarWebStorage);
+btDesmarcarSelecionado.addEventListener('click', desmarcarSelecionado);
+btEditarSelecionado.addEventListener('click', editarSelecionado);

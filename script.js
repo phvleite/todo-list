@@ -1,6 +1,8 @@
 /* eslint-disable sonarjs/cognitive-complexity */
 const listaTarefa = [];
 let itensTodosSalvos = [];
+const ClSelecionado = '.selecionado';
+const ClCompleted = '.completed';
 const idElementoPaiLista = 'lista-tarefas';
 const tarefa = document.getElementById('texto-tarefa');
 const btInserirTarefa = document.getElementById('criar-tarefa');
@@ -10,16 +12,14 @@ const btApagaFinalizados = document.getElementById('remover-finalizados');
 const classBasicaItemLista = 'item-tarefas';
 const btSalvarTarefas = document.getElementById('salvar-tarefas');
 const btMoverCima = document.getElementById('mover-cima');
-// const btMoverBaixo = document.getElementById('mover-baixo');
+const btMoverBaixo = document.getElementById('mover-baixo');
 const btRemoverSelecionado = document.getElementById('remover-selecionado');
 
 function selecionarTarefa(evento) {
   const classeEvento = 'selecionado';
   const selecionado = document.getElementById(evento.target.id);
   const slClNm = selecionado.className;
-  if (slClNm === `item-tarefas ${classeEvento}`) {
-    selecionado.classList.remove(classeEvento);
-  } else if (slClNm !== `item-tarefas ${classeEvento}` && slClNm !== 'item-tarefas completed') {
+  if (slClNm !== `item-tarefas ${classeEvento}` && slClNm !== 'item-tarefas completed') {
     const selecionadoAtual = document.querySelector(`.${classeEvento}`);
     if (selecionadoAtual) {
       selecionadoAtual.classList.remove(classeEvento);
@@ -71,7 +71,6 @@ function recuperaLista(itensRemover, itensTodos) {
   if (itensLista.length > 0) {
     for (let i = 0; i < itensLista.length; i += 1) {
       itensLista[i].setAttribute('id', `${i}`);
-      itensLista[i].style.order = `${i}`;
       lista.appendChild(itensLista[i]);
       listaTarefa.push(itensLista[i].innerText);
     }
@@ -91,7 +90,6 @@ function insereTarefa() {
     itemLista.innerText = listaTarefa[i];
     itemLista.setAttribute('class', classBasicaItemLista);
     itemLista.setAttribute('id', `${i}`);
-    itemLista.style.order = `${i}`;
     lista.appendChild(itemLista);
   }
   tarefa.value = '';
@@ -130,20 +128,19 @@ function removeTerefas(tipoTarefa, mensagem) {
 }
 
 function removeFinalizados() {
-  const tpTarefa = '.completed';
+  const tpTarefa = ClCompleted;
   const mensagem = 'Não existem tarefas finalizadas!';
   removeTerefas(tpTarefa, mensagem);
 }
 
 function removeSelecionado() {
-  const tpTarefa = '.selecionado';
+  const tpTarefa = ClSelecionado;
   const mensagem = 'Não existe tarefa selecionada!';
   removeTerefas(tpTarefa, mensagem);
 }
 
 function verificaEnter(evento) {
-  const tecla = evento.keyCode;
-  if (tecla === 13) {
+  if (evento.keyCode === 13) {
     insereTarefa();
   }
 }
@@ -195,10 +192,27 @@ function salvaListaTarefas() {
   alert('Lista de Tarefas salvas!');
 }
 
-function moverCima(evento) {
-  const ordem = document.getElementById(evento.target.id);
-  console.log(ordem.id);
+function moverCima() {
+  const tarefaMover = document.querySelector(ClSelecionado);
+  const lista = document.getElementById(idElementoPaiLista);
+  if (tarefaMover && tarefaMover !== lista.firstElementChild) {
+    const trocaTarefa = tarefaMover.previousElementSibling;
+    lista.insertBefore(tarefaMover, trocaTarefa);
+  }
 }
+
+function moverBaixo() {
+  const tarefaMover = document.querySelector(ClSelecionado);
+  const lista = document.getElementById(idElementoPaiLista);
+  if (tarefaMover && tarefaMover !== lista.lastElementChild) {
+    const trocaTarefa = tarefaMover.nextElementSibling;
+    lista.insertBefore(tarefaMover, trocaTarefa.nextElementSibling);
+  }
+}
+// Os metodo acima foi descoberto em code review no repositório
+// de ANDRÉ FELIPE (https://github.com/tryber/sd-019-a-project-todo-list/blob/andre-felipe-todo-list-project/script.js)
+// onde ele reporta que encontrou esta solução no
+// Repositório de LUÁ OCTAVINAO (https://github.com/tryber/sd-019-a-project-todo-list/pull/73/files#) e aplicado de acordo com a necessidade da função.
 
 btInserirTarefa.addEventListener('click', insereTarefa);
 inputTexto.addEventListener('keyup', verificaEnter);
@@ -207,3 +221,4 @@ btApagaFinalizados.addEventListener('click', removeFinalizados);
 btRemoverSelecionado.addEventListener('click', removeSelecionado);
 btSalvarTarefas.addEventListener('click', salvaListaTarefas);
 btMoverCima.addEventListener('click', moverCima);
+btMoverBaixo.addEventListener('click', moverBaixo);

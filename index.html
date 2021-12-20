@@ -8,7 +8,11 @@
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Dancing+Script:wght@400;500;600;700&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lobster&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Oswald:wght@200;300;400;500;600;700&family=Pacifico&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Saira+Condensed:wght@100;200;300;400;500;600;700;800;900&family=Secular+One&family=Smooch&family=Ubuntu+Condensed&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&family=Yanone+Kaffeesatz:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Anton&family=Dancing+Script:wght@400;500;600;700&family=Kanit:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Lobster&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Oswald:wght@200;300;400;500;600;700&family=Pacifico&family=Raleway:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Saira+Condensed:wght@100;200;300;400;500;600;700;800;900&family=Secular+One&family=Smooch&family=Ubuntu+Condensed&family=Ubuntu+Mono:ital,wght@0,400;0,700;1,400;1,700&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&family=Yanone+Kaffeesatz:wght@200;300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://kit.fontawesome.com/c7a86d0e1c.js" crossorigin="anonymous"></script>
+    <!-- O link acima foi encontrado em CODE REVIEW de LUÁ OCTAVINAO (https://github.com/tryber/sd-019-a-project-todo-list/pull/73/files#) e usado aqui. -->
 </head>
 <body>
     <header>
@@ -16,21 +20,23 @@
         <span id="funcionamento">Clique duas vezes em um item para marcá-lo como completo</span>
     </header>
     <main>
-        <div id="menu-inferior">
-            <div>
-                <button id="apaga-tudo" class="button">Apagar<br>Todas</button>
-                <button id="remover-finalizados" class="button">Apagar<br>Finalizados</button>
-                <button id="salvar-tarefas" class="button">Salvar<br>Tarefas</button>
-                <button id="mover-cima" class="button">Mover<br>para Cima</button>
-                <button id="mover-baixo" class="button">Mover<br>para Baixo</button>
-                <button id="remover-selecionado" class="button">Apagar<br>Selecionados</button>
-                <button id="editar" class="button">Editar<br>Selecionado</button>
-                <button id="resetar" class="button">Resetar<br>Web Storage</button>
-            </div>
+        <div id="menu">
+            <button id="apaga-tudo" class="button" title="Apaga todos"><i class="fas fa-trash"></i></button>
+            <button id="remover-finalizados" class="button" title="Apaga finalizados"><i class="fas fa-trash"><i
+                    class="fas fa-ban"></i></i><br></button>
+            <button id="salvar-tarefas" class="button" title="Salva"><i class="fas fa-sd-card"></i></button>
+            <button id="mover-cima" class="button" title="Mover para cima"><i
+                    class="fas fa-arrow-circle-up"></i></button>
+            <button id="mover-baixo" class="button" title="Mover para baixo"><i
+                    class="fas fa-arrow-circle-down"></i></button>
+            <button id="remover-selecionado" class="button" title="Apaga selecionados"><i class="fas fa-trash"></i><i
+                    class="fas fa-check-circle"></i></button>
+            <button id="resetar" class="button" title="Resetar Web Storage"><i class="fas fa-snowplow"></i></button>
+            <button id="editar" class="button" title="Editar selecionados"><i class="fas fa-edit"></i></button>
         </div>
-        <div>
+        <div id="insere-texto">
             <input id="texto-tarefa">
-            <button id="criar-tarefa" class="button">Inserir Tarefa</button>
+            <button id="criar-tarefa" class="button" title="Inserir"><i class="fas fa-sign-in-alt"></i></i></button>
         </div>
         <div>
             <ol id="lista-tarefas">

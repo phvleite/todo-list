@@ -1,73 +1,97 @@
-body {
-    background-color: gainsboro;
-    color: navy;
-    font-family: 'Montserrat', sans-serif;
+:root
+{
+    --clr: gainsboro;
+    --clr-font: navy;
 }
-
-h1 {
+body
+{
+    display: flex;
+    flex-direction: column;
+    background-color: var(--clr);
+    color:var(--clr-font);
+    font-family: 'Montserrat', sans-serif;
+    justify-content:center ;
+    align-items: center;
+    min-height: 20vh;
+}
+header
+{
+    display: flex;
+    position: relative;
+    flex-direction: column;
+}
+h1
+{
     font-weight: 900;
     margin-bottom: 0px;
 }
-
-#funcionamento {
+#funcionamento
+{
     font-size: 13px;
     font-weight: 200;
 }
-
-.button {
+.button
+{
+    position: relative;
+    flex-direction: row;
+    justify-content: center;
+    position: relative;
     text-decoration: none;
-    padding: 5px;
     border-radius: 10px;
     text-align: center;
     width: 80px;
     transition: 0.5s;
     font-size: 28px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     margin-top: 20px;
     border-style:solid;
     border-width: 2px;
     border-color: rgb(211, 211, 211);
-    background-color: gainsboro;
-    color: navy;
+    background-color: var(--clr);
+    color: var(--clr-font);
     font-family: 'Ubuntu Condensed', sans-serif;
 }
-
-.button:hover {
+#criar-tarefa.button
+{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+.button:hover
+{
     background: rgb(211, 211, 211);
     box-shadow: 0 0 0.25em gray;
     color: firebrick;
 }
-
-#insere-texto {
-    margin-left: 40px;
+#insere-texto
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    position: relative;
 }
-
-#texto-tarefa {
+#texto-tarefa
+{
     font-size: 20px;
-    color: navy;
+    color:var(--clr-font);
     font-family: 'Ubuntu Condensed', sans-serif;
     width: 350px;
     height: 40px;
     margin-right: 10px;
 }
-
-.selecionado {
+.selecionado
+{
     background: rgb(128, 128, 128);
     color:darkorange;
     font-weight: 600;
 }
-
-.completed {
+.completed
+{
     text-decoration: line-through solid rgb(0,0,0);
     color: rgb(54,54,54);
     font-weight: 100;
 }
-
-#lista-tarefas {
-    width: 500px;
-}
-
-li {
+li
+{
     display: flex;
     border-bottom-width: 1px;
     border-bottom-style: solid;
@@ -76,17 +100,18 @@ li {
     color: DodgerBlue;
     height:25px;
 }
-
-li:nth-child(2n) {
+li:nth-child(2n)
+{
     background-color: lightgray;
 }
-
-li:nth-child(2n).selecionado {
+li:nth-child(2n).selecionado
+{
     background-color: gray;
 }
-
-ol {
-    display: flex;
-    flex-direction: column;
+ol
+{
+    display:list-item;
+    margin-left: auto;
+    margin-right: auto;
+    width: 700px;
 }
-
